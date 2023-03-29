@@ -2,33 +2,33 @@ const NotesModel = require('./notesModel');
 
 describe('NotesModel', () => {
 
-  let notesModel;
+  let model;
 
   beforeEach(() => {
-    notesModel = new NotesModel();
+    model = new NotesModel();
   });
 
   it('constructs with an empty notes list', () => {
-    expect(notesModel).toBeInstanceOf(NotesModel);
-    expect(notesModel.getNotes()).toEqual([]);
+    expect(model).toBeInstanceOf(NotesModel);
+    expect(model.getNotes()).toEqual([]);
   });
 
   it('add a note to the list', () => {
-    notesModel.addNote('Buy milk');
-    expect(notesModel.getNotes()).toEqual(['Buy milk']);
+    model.addNote('Buy milk');
+    expect(model.getNotes()).toEqual(['Buy milk']);
   });
 
   it('adds multiple notes to the list', () => {
-    notesModel.addNote('Buy milk');
-    notesModel.addNote('Go to the gym');
-    expect(notesModel.getNotes()).toEqual(['Buy milk', 'Go to the gym']);
+    model.addNote('Buy milk');
+    model.addNote('Go to the gym');
+    expect(model.getNotes()).toEqual(['Buy milk', 'Go to the gym']);
   });
 
   it('resets the list to empty when called', () => {
-    notesModel.addNote('Buy milk');
-    notesModel.addNote('Go to the gym');
-    notesModel.reset();
-    expect(notesModel.getNotes()).toEqual([]);
+    model.addNote('Buy milk');
+    model.addNote('Go to the gym');
+    model.reset();
+    expect(model.getNotes()).toEqual([]);
   });
 
 });
