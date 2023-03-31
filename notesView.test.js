@@ -35,9 +35,23 @@ describe ('NotesView', () => {
     addNoteButtonEl.click();
 
     const notes = document.querySelectorAll('.note');
-    
+
     expect(notes.length).toBe(1);
     expect(notes[0].textContent).toEqual('secret note');
+  });
+
+  it('displays the correct number of notes when displayNotes is called twice', () => {
+    model.addNote('First note');
+    model.addNote('Second note');
+    view.displayNotes();
+
+    model.addNote('Third note');
+    model.addNote('Fourth note');
+    view.displayNotes();
+
+    const notes = document.querySelectorAll('.note');
+    
+    expect(notes.length).toBe(4);
   });
 
 });
