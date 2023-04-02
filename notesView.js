@@ -8,13 +8,6 @@ class NotesView {
 
     this.addNoteButtonEl = document.querySelector('#add-note-button');
 
-    // this.addNoteButtonEl.addEventListener('click', () => {
-    //   const inputEl = document.querySelector('#note-input').value;
-    //   this.model.addNote(inputEl);
-    //   this.displayNotes();
-    //   document.querySelector('#note-input').value = '';
-    // })
-
     this.addNoteButtonEl.addEventListener('click', async () => {
       const inputEl = document.querySelector('#note-input').value;
       await this.client.createNote(inputEl);
