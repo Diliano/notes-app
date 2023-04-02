@@ -4,17 +4,23 @@
 
 const fs = require('fs');
 const NotesModel = require('./notesModel');
+const NotesClient = require('./notesClient');
 const NotesView = require('./notesView');
+
+jest.mock('./notesClient');
 
 describe ('NotesView', () => {
 
   let model;
+  let client;
   let view;
 
   beforeEach(() => {
+    NotesClient.mockClear();
     document.body.innerHTML = fs.readFileSync('./index.html');
     model = new NotesModel();
-    view = new NotesView(model);
+    client = new NotesClient();
+    view = new NotesView(model, client);
   });
 
   it('displays all notes', () => {
@@ -52,6 +58,23 @@ describe ('NotesView', () => {
     const notes = document.querySelectorAll('.note');
     
     expect(notes.length).toBe(4);
+  });
+
+  it('displays notes from API', async () => {
+    const notes = [{test: 'test'}, {test: 'test1'}];
+
+    client.loadNotes.mockImplementationOnce((callback) => {
+      callback(notes);
+    });
+
+    const setNotesSpy = jest.spyOn(model, 'setNotes');
+    const displayNotesSpy = jest.spyOn(view, 'displayNotes');
+
+    await view.displayNotesFromApi();
+    
+    expect(client.loadNotes).toHaveBeenCalled();
+    expect(setNotesSpy).toHaveBeenCalledWith(notes);
+    expect(displayNotesSpy).toHaveBeenCalled();
   });
 
 });
