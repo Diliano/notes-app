@@ -16,5 +16,20 @@ describe('NotesClient', () => {
     expect(mockCallback).toHaveBeenCalled();
     expect(mockCallback).toHaveBeenCalledWith(mockData);
   });
+
+  it('sends a POST request with the given note', async () => {
+    const client = new NotesClient();
+    const mockNote = 'New note';
+
+    await client.createNote(mockNote);
+
+    expect(fetch).toHaveBeenCalledWith('http://localhost:3000/notes', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ content: mockNote })
+    });
+  });
   
 });
