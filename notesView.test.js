@@ -32,7 +32,7 @@ describe ('NotesView', () => {
     expect(document.querySelectorAll('div.note').length).toBe(2);
   });
 
-  it('adds a new note and displays it', () => {
+  xit('adds a new note and displays it', () => {
     const addNoteButtonEl = document.querySelector('#add-note-button');
 
     const inputEl = document.querySelector('#note-input');
@@ -71,10 +71,25 @@ describe ('NotesView', () => {
     const displayNotesSpy = jest.spyOn(view, 'displayNotes');
 
     await view.displayNotesFromApi();
-    
+
     expect(client.loadNotes).toHaveBeenCalled();
     expect(setNotesSpy).toHaveBeenCalledWith(notes);
     expect(displayNotesSpy).toHaveBeenCalled();
+  });
+
+  it('calls createNote method and displays notes from API when the user adds a new note', async () => {
+    const addNoteButtonEl = document.querySelector('#add-note-button');
+    const inputEl = document.querySelector('#note-input');
+  
+    inputEl.value = 'New note';
+  
+    const clientCreateNoteSpy = jest.spyOn(client, 'createNote');
+    const viewDisplayNotesFromApiSpy = jest.spyOn(view, 'displayNotesFromApi');
+  
+    await addNoteButtonEl.click();
+  
+    expect(clientCreateNoteSpy).toHaveBeenCalledWith('New note');
+    expect(viewDisplayNotesFromApiSpy).toHaveBeenCalled();
   });
 
 });
