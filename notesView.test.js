@@ -92,4 +92,11 @@ describe ('NotesView', () => {
     expect(viewDisplayNotesFromApiSpy).toHaveBeenCalled();
   });
 
+  it('displays an error message when an error occurs', () => {
+    const errorMessage = 'Oops, something went wrong!';
+    view.displayError(errorMessage);
+    const errorEl = document.querySelector('.error');
+    expect(errorEl.textContent).toEqual(errorMessage);
+  });
+
 });

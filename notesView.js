@@ -40,6 +40,13 @@ class NotesView {
     });
   }
 
+  displayError(errorMessage) {
+    const errorEl = document.createElement('div');
+    errorEl.className = 'error';
+    errorEl.textContent = errorMessage;
+    this.mainContainerEl.append(errorEl);
+  }
+
 };
 
 module.exports = NotesView;
