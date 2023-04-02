@@ -16,11 +16,15 @@ class NotesClient {
       console.error("Error:", error);
     }
   }
-  
-  async loadNotes(callback) {
-    const response = await fetch('http://localhost:3000/notes');
-    const notes = await response.json();
-    callback(notes);
+
+  async loadNotes(callback, errorCallback) {
+    try {
+      const response = await fetch('http://localhost:3000/notes');
+      const notes = await response.json();
+      callback(notes);
+    } catch (error) {
+      errorCallback(error);
+    }
   }
 
 };
