@@ -7,7 +7,6 @@ class NotesView {
     this.mainContainerEl = document.querySelector('#main-container');
 
     this.addNoteButtonEl = document.querySelector('#add-note-button');
-
     this.addNoteButtonEl.addEventListener('click', async () => {
       const inputEl = document.querySelector('#note-input').value;
       await this.client.createNote(inputEl, () => {
@@ -17,6 +16,11 @@ class NotesView {
       document.querySelector('#note-input').value = '';
     })
 
+    this.resetNotesButtonEl = document.querySelector('#reset-notes-button');
+    this.resetNotesButtonEl.addEventListener('click', async () => {
+      await this.client.resetNotes();
+      this.displayNotesFromApi();
+    });
   }
 
   displayNotesFromApi() {

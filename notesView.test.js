@@ -98,4 +98,15 @@ describe ('NotesView', () => {
     expect(errorEl.textContent).toBe('Oops, something went wrong!');
   });
 
+  it('resets all notes when the user clicks the reset button', async () => {
+    const resetNotesButtonEl = document.querySelector('#reset-notes-button');
+    const clientResetNotesSpy = jest.spyOn(client, 'resetNotes');
+    const viewDisplayNotesFromApiSpy = jest.spyOn(view, 'displayNotesFromApi');
+  
+    await resetNotesButtonEl.click();
+  
+    expect(clientResetNotesSpy).toHaveBeenCalled();
+    expect(viewDisplayNotesFromApiSpy).toHaveBeenCalled();
+  });
+
 });
