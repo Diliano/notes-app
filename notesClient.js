@@ -1,6 +1,6 @@
 class NotesClient {
 
-  async createNote(note) {
+  async createNote(note, errorCallback) {
     try {
       const data = { content: note };
       const response = await fetch('http://localhost:3000/notes', {
@@ -13,7 +13,7 @@ class NotesClient {
       const result = await response.json();
       console.log("Success:", result);
     } catch (error) {
-      console.error("Error:", error);
+      errorCallback();
     }
   }
 

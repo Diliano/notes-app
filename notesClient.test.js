@@ -20,8 +20,9 @@ describe('NotesClient', () => {
   it('sends a POST request with the given note', async () => {
     const client = new NotesClient();
     const mockNote = 'New note';
+    const mockErrorCallback = jest.fn()
 
-    await client.createNote(mockNote);
+    await client.createNote(mockNote, mockErrorCallback);
 
     expect(fetch).toHaveBeenCalledWith('http://localhost:3000/notes', {
       method: 'POST',

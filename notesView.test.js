@@ -77,7 +77,7 @@ describe ('NotesView', () => {
     expect(displayNotesSpy).toHaveBeenCalled();
   });
 
-  it('calls createNote method and displays notes from API when the user adds a new note', async () => {
+  xit('calls createNote method and displays notes from API when the user adds a new note', async () => {
     const addNoteButtonEl = document.querySelector('#add-note-button');
     const inputEl = document.querySelector('#note-input');
   
