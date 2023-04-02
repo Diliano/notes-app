@@ -18,10 +18,15 @@ class NotesView {
   }
 
   displayNotesFromApi() {
-    this.client.loadNotes((notes) => {
-      this.model.setNotes(notes);
-      this.displayNotes();
-    });
+    this.client.loadNotes(
+      (notes) => {
+        this.model.setNotes(notes);
+        this.displayNotes();
+      },
+      () => {
+        this.displayError();
+      }
+    );
   }
 
   displayNotes() {
@@ -40,10 +45,10 @@ class NotesView {
     });
   }
 
-  displayError(errorMessage) {
+  displayError() {
     const errorEl = document.createElement('div');
     errorEl.className = 'error';
-    errorEl.textContent = errorMessage;
+    errorEl.textContent = 'Oops, something went wrong!';
     this.mainContainerEl.append(errorEl);
   }
 

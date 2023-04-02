@@ -93,10 +93,9 @@ describe ('NotesView', () => {
   });
 
   it('displays an error message when an error occurs', () => {
-    const errorMessage = 'Oops, something went wrong!';
-    view.displayError(errorMessage);
+    view.displayError();
     const errorEl = document.querySelector('.error');
-    expect(errorEl.textContent).toEqual(errorMessage);
+    expect(errorEl.textContent).toBe('Oops, something went wrong!');
   });
 
 });

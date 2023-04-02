@@ -6,7 +6,7 @@ class NotesClient {
       const response = await fetch('http://localhost:3000/notes', {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json", 
         },
         body: JSON.stringify(data),
       });
@@ -23,7 +23,7 @@ class NotesClient {
       const notes = await response.json();
       callback(notes);
     } catch (error) {
-      errorCallback(error);
+      errorCallback();
     }
   }
 
